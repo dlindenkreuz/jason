@@ -30,8 +30,7 @@ defmodule JasonBench.MixProject do
       {:exjsx, "~> 4.0"},
       {:tiny, "~> 1.0"},
       {:jsone, "~> 1.4"},
-      {:jiffy, "~> 1.0"},
-      {:json, "~> 1.0"},
+      {:jiffy, "~> 1.0"}
     ]
   end
 end

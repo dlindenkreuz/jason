@@ -7,7 +7,6 @@ encode_jobs = %{
   # "Tiny"           => &Tiny.encode!/1,
   # "jsone"          => &:jsone.encode/1,
   "jiffy" => &:jiffy.encode/1
-  # "JSON"           => &JSON.encode!/1,
   # "term_to_binary" => &:erlang.term_to_binary/1,
 }
 
