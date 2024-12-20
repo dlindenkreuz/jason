@@ -43,6 +43,7 @@ Benchee.run(encode_jobs,
   time: 15,
   memory_time: 0.01,
   reduction_time: 0.01,
+  pre_check: true,
   inputs:
     for name <- encode_inputs, into: %{} do
       name
