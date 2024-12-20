@@ -6,8 +6,12 @@ decode_jobs =
     "Tiny" => fn {json, _} -> Tiny.decode!(json) end,
     "jsone" => fn {json, _} -> :jsone.decode(json) end,
     "jiffy" => fn {json, _} -> :jiffy.decode(json, [:return_maps, :use_nil]) end
+    "jiffy" => fn {json, _} -> :jiffy.decode(json, [:return_maps, :use_nil]) end,
+    "Jsonrs" => fn {json, _} -> Jsonrs.decode!(json) end
     # "binary_to_term/1" => fn {_, etf} -> :erlang.binary_to_term(etf) end,
   }
+  |> Bench.Helpers.put_job_if_loaded(:json, fn {json, _} -> :json.decode(json) end)
+  |> Bench.Helpers.put_job_if_loaded(Elixir.JSON, fn {json, _} -> Elixir.JSON.decode!(json) end)
 
 decode_inputs = [
   "GitHub",

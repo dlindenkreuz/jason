@@ -1,14 +1,19 @@
-encode_jobs = %{
-  "Jason" => &Jason.encode_to_iodata!(&1, escape: :elixir_json),
-  "Jason native" => &Jason.encode_to_iodata!(&1, escape: :native_json),
-  # "Jason strict"   => &Jason.encode_to_iodata!(&1, maps: :strict, escape: :elixir_json),
-  "Poison" => &Poison.encode!/1,
-  # "JSX"            => &JSX.encode!/1,
-  # "Tiny"           => &Tiny.encode!/1,
-  # "jsone"          => &:jsone.encode/1,
-  "jiffy" => &:jiffy.encode/1
-  # "term_to_binary" => &:erlang.term_to_binary/1,
-}
+encode_jobs =
+  %{
+    "Jason" => &Jason.encode_to_iodata!(&1, escape: :elixir_json),
+    "Jason native" => &Jason.encode_to_iodata!(&1, escape: :native_json),
+    # "Jason strict"   => &Jason.encode_to_iodata!(&1, maps: :strict, escape: :elixir_json),
+    "Poison" => &Poison.encode!/1,
+    # "JSX"            => &JSX.encode!/1,
+    # "Tiny"           => &Tiny.encode!/1,
+    # "jsone"          => &:jsone.encode/1,
+    "jiffy" => &:jiffy.encode/1,
+    "Jsonrs" => &Jsonrs.encode_to_iodata!/1,
+    "Jsonrs (lean)" => &Jsonrs.encode_to_iodata!(&1, lean: true)
+    # "term_to_binary" => &:erlang.term_to_binary/1,
+  }
+  |> Bench.Helpers.put_job_if_loaded(:json, &:json.encode/1)
+  |> Bench.Helpers.put_job_if_loaded(Elixir.JSON, &Elixir.JSON.encode!/1)
 
 encode_inputs = [
   "GitHub",
