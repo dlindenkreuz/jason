@@ -27,16 +27,6 @@ encode_inputs = [
   "Canada"
 ]
 
-read_data = fn name ->
-  name
-  |> String.downcase()
-  |> String.replace(~r/([^\w]|-|_)+/, "-")
-  |> String.trim("-")
-  |> (&"data/#{&1}.json").()
-  |> Path.expand(__DIR__)
-  |> File.read!()
-end
-
 Benchee.run(encode_jobs,
   #  parallel: 4,
   warmup: 2,
@@ -47,7 +37,7 @@ Benchee.run(encode_jobs,
   inputs:
     for name <- encode_inputs, into: %{} do
       name
-      |> read_data.()
+      |> Bench.Helpers.read_data!()
       |> Jason.decode!()
       |> (&{name, &1}).()
     end,

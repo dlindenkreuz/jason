@@ -25,17 +25,7 @@ decode_inputs = [
   "Issue 90"
 ]
 
-read_data = fn name ->
-  file =
-    name
-    |> String.downcase()
-    |> String.replace(~r/([^\w]|-|_)+/, "-")
-    |> String.trim("-")
-
-  File.read!(Path.expand("data/#{file}.json", __DIR__))
-end
-
-inputs = for name <- decode_inputs, into: %{}, do: {name, read_data.(name)}
+inputs = for name <- decode_inputs, into: %{}, do: {name, Bench.Helpers.read_data!(name)}
 
 Benchee.run(decode_jobs,
   #  parallel: 4,
